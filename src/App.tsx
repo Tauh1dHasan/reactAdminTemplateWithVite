@@ -1,6 +1,5 @@
-import Form from "./pages/Form";
 import Home from "./pages/Home";
-import Table from "./pages/Table";
+import BlankPage from "./pages/BlankPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -8,8 +7,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Form" element={<Form />} />
-        <Route path="/Table" element={<Table />} />
+        <Route path="/BlankPage" element={<BlankPage />} />
       </Routes>
     </BrowserRouter>
   );

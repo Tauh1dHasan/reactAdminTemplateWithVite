@@ -15,7 +15,7 @@ function Topbar({ onToggleSidebar }: { onToggleSidebar: () => void }) {
               data-bs-toggle="dropdown"
             >
               <div className="position-relative">
-                <i className="align-middle" data-feather="bell"></i>
+                <i className="fa-regular fa-bell"></i>
                 <span className="indicator">4</span>
               </div>
             </a>
