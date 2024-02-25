@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Sidebar({ isOpen }: { isOpen: any }) {
+  const location = useLocation();
+
   return (
     <>
       <nav
@@ -34,14 +36,22 @@ function Sidebar({ isOpen }: { isOpen: any }) {
           <ul className="sidebar-nav">
             {/* <li className="sidebar-header">Pages</li> */}
 
-            <li className="sidebar-item active">
+            <li
+              className={`sidebar-item ${
+                location.pathname === "/" ? "active" : ""
+              }`}
+            >
               <Link className="sidebar-link" to="/">
                 <i className="fa-solid fa-chalkboard-user"></i>
                 <span className="align-middle">Dashboard</span>
               </Link>
             </li>
 
-            <li className="sidebar-item">
+            <li
+              className={`sidebar-item ${
+                location.pathname === "/blankPage" ? "active" : ""
+              }`}
+            >
               <Link className="sidebar-link" to="/blankPage">
                 <i className="fa-regular fa-file"></i>
                 <span className="align-middle">Blank Page</span>
