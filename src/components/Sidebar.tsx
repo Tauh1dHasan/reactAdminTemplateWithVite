@@ -1,4 +1,4 @@
-function Sidebar({ isOpen }) {
+function Sidebar({ isOpen }: { isOpen: any }) {
   return (
     <>
       <nav
