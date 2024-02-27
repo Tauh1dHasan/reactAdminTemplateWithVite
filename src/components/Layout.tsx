@@ -19,6 +19,7 @@ function Layout({ children }: { children: any }) {
         <Topbar onToggleSidebar={toggleSidebar} />
 
         <main className="content">{children}</main>
+
         <Footer />
       </div>
     </div>
