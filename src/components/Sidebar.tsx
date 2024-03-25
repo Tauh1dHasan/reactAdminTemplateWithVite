@@ -49,12 +49,23 @@ function Sidebar({ isOpen }: { isOpen: any }) {
 
             <li
               className={`sidebar-item ${
-                location.pathname === "/blankPage" ? "active" : ""
+                location.pathname === "/BlankPage" ? "active" : ""
               }`}
             >
-              <Link className="sidebar-link" to="/blankPage">
+              <Link className="sidebar-link" to="/BlankPage">
                 <i className="fa-regular fa-file"></i>
                 <span className="align-middle">Blank Page</span>
+              </Link>
+            </li>
+
+            <li
+              className={`sidebar-item ${
+                location.pathname === "/TaskIndex" ? "active" : ""
+              }`}
+            >
+              <Link className="sidebar-link" to="/TaskIndex">
+                <i className="fa-regular fa-file"></i>
+                <span className="align-middle">Manage Task</span>
               </Link>
             </li>
 
