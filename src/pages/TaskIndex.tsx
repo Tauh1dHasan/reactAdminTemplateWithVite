@@ -5,6 +5,10 @@ import Layout from "../components/Layout";
 
 function TaskIndex() {
   const [tasks, setTasks] = useState([]);
+  const [formData, setFormData] = useState({
+    title: "",
+    is_done: false,
+  });
 
   useEffect(() => {
     axios
@@ -23,46 +27,6 @@ function TaskIndex() {
 
   return (
     <Layout>
-      <div
-        className="modal fade"
-        id="centeredModalPrimary"
-        role="dialog"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Centered modal</h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body m-3">
-              <p className="mb-0">
-                Use Bootstrap’s JavaScript modal plugin to add dialogs to your
-                site for lightboxes, user notifications, or completely custom
-                content.
-              </p>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Save changes
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="container-fluid p-0">
         <h1 className="h3 mb-3">Manage Task</h1>
 
@@ -99,7 +63,17 @@ function TaskIndex() {
                         {tasks.map((task) => (
                           <tr key={task.id}>
                             <td>{task.title}</td>
-                            <td>{task.status}</td>
+                            <td>
+                              <span
+                                className={`badge ${
+                                  task.status == "Open"
+                                    ? "bg-success"
+                                    : "bg-danger"
+                                }`}
+                              >
+                                {task.status}
+                              </span>
+                            </td>
                             <td>{task.created_at}</td>
                             <td className="table-action">
                               <a href="#">
@@ -126,6 +100,67 @@ function TaskIndex() {
           </div>
         </div>
       </div>
+
+      {/* Add new task Modal Start */}
+      <div
+        className="modal fade"
+        id="centeredModalPrimary"
+        role="dialog"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered" role="document">
+          <div className="modal-content">
+            <form method="POST">
+              <div className="modal-header">
+                <h5 className="modal-title">Add new task</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body m-3">
+                <div className="mb-3">
+                  <label htmlFor="exampleInputEmail1" className="form-label">
+                    Task Title
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    required
+                  />
+                </div>
+                <div className="mb-3 form-check">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="exampleCheck1"
+                  />
+                  <label className="form-check-label" htmlFor="exampleCheck1">
+                    check if done
+                  </label>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Save changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      {/* Add new task Modal End */}
     </Layout>
   );
 }
