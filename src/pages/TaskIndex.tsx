@@ -25,6 +25,27 @@ function TaskIndex() {
       });
   }, []);
 
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8000/api/tasks", formData)
+      .then((response) => {
+        // alert("Task added successfully:", response.data);
+        setFormData({ title: "", is_done: false });
+      })
+      .catch((error) => {
+        console.error("Error adding task:", error);
+      });
+  };
+
   return (
     <Layout>
       <div className="container-fluid p-0">
@@ -110,9 +131,11 @@ function TaskIndex() {
       >
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
-            <form method="POST">
+            <form onSubmit={handleSubmit}>
               <div className="modal-header">
-                <h5 className="modal-title">Add new task</h5>
+                <h5 className="modal-title" id="centeredModalPrimaryLabel">
+                  Add new task
+                </h5>
                 <button
                   type="button"
                   className="btn-close"
@@ -122,14 +145,16 @@ function TaskIndex() {
               </div>
               <div className="modal-body m-3">
                 <div className="mb-3">
-                  <label htmlFor="exampleInputEmail1" className="form-label">
+                  <label htmlFor="taskTitle" className="form-label">
                     Task Title
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
+                    id="taskTitle"
+                    name="title"
+                    value={formData.title}
+                    onChange={handleInputChange}
                     required
                   />
                 </div>
@@ -137,9 +162,12 @@ function TaskIndex() {
                   <input
                     type="checkbox"
                     className="form-check-input"
-                    id="exampleCheck1"
+                    id="is_done"
+                    name="is_done"
+                    checked={formData.is_done}
+                    onChange={handleInputChange}
                   />
-                  <label className="form-check-label" htmlFor="exampleCheck1">
+                  <label className="form-check-label" htmlFor="is_done">
                     check if done
                   </label>
                 </div>
